@@ -1,0 +1,275 @@
+@font-face {
+	font-family: 'Steps Mono';
+	src: url('assets/Steps-Mono.otf');
+}
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+	-webkit-print-color-adjust: exact !important;
+	print-color-adjust: exact !important;
+	image-rendering: crisp-edges;
+}
+body {
+	background-color: black;
+}
+
+/* Poster */
+.poster {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	width: 48vmin;
+	height: 72vmin;
+	overflow: hidden;
+	display: flex;
+	flex-wrap: wrap;
+	align-items: start;
+	background-color: black;
+}
+.poster[data-size='letter'] {
+	width: 62vmin;
+	height: 80vmin;
+}
+.poster[data-size='letter'][data-rotate='1'] {
+	width: 80vmin;
+	height: 62vmin;
+}
+.poster[data-size='tabloid'] {
+	width: 52vmin;
+	height: 80vmin;
+}
+.poster[data-size='tabloid'][data-rotate='1'] {
+	width: 80vmin;
+	height: 52vmin;
+}
+.poster[data-size='fullsize'] {
+	width: 53vmin;
+	height: 80vmin;
+}
+.poster[data-size='fullsize'][data-rotate='1'] {
+	width: 80vmin;
+	height: 53vmin;
+}
+.poster[data-fullscreen='1'] {
+	width: 100vw !important;
+	height: 100dvh !important;
+	cursor: none;
+}
+.poster[data-borders="1"] {
+	border: .5px solid white;
+}
+.poster[data-borders="1"] div {
+	border: .5px solid white;
+}
+.poster[data-borders="2"] div {
+	border: 1px solid white;
+	border-radius: 50%;
+}
+.poster div {
+	overflow: hidden;
+	position: relative;
+}
+.poster[data-rows="50"] div {
+	height: 2%;
+}
+.poster[data-rows="25"] div {
+	height: 4%;
+}
+.poster[data-rows="10"] div {
+	height: 10%;
+}
+.poster div img {
+	height: 200%;
+	position: absolute;
+	left: 0;
+	top: -50%;
+	animation-name: move;
+	animation-timing-function: ease-in-out;
+	animation-iteration-count: infinite;
+	animation-direction: alternate;
+	animation-duration: 1s;
+	transform-origin: center;
+	background-color: black;
+}
+@keyframes move {
+	from {
+		transform: translateX(0%);
+	}
+	to {
+		transform: translateX(-100%);
+	}
+}
+
+/* Wavesurfer styles */
+#record {
+	position: fixed;
+	left: 50%;
+	bottom: 10px;
+	transform: translate(-50%, 0);
+	padding: 10px 15px 8.5px 20px;
+	letter-spacing: 5px;
+	background-color: black;
+	border: 1px solid white;
+	color: white;
+	text-transform: uppercase;
+	font-weight: bold;
+	font-size: 10px;
+	font-family: 'Steps Mono', monospace;
+	cursor: pointer;
+	z-index: 9999;
+}
+#record[data-active="0"] {
+	background-color: red;
+	color: black;
+	border: 1px solid red;
+}
+#record:hover {
+	background-color: white;
+	color: black;
+	border: 1px solid white;
+}
+#record:active {
+	opacity: .5;
+}
+#mic {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	right: 10px;
+	bottom: 100px;
+	border: 1px solid white !important;
+	z-index: 99;
+	margin: 0 !important;
+	border-radius: 50% !important;
+	height: 80vmin;
+	width: 80vmin;
+	transform: translate(-50%, -50%);
+	overflow: hidden;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+#mic div{
+	height: 128px;
+	width: 100%;
+	transform: scaleY(1.5);
+}
+#recordings {
+	opacity: 0;
+	pointer-events: none;
+}
+
+/* Post-processing controls */
+.controls {
+	position: fixed;
+	left: 10px;
+	width: calc(100vw - 20px);
+	display: flex;
+	align-items: center;
+	justify-content: start;
+	z-index: 9999999;
+	gap: 10px;
+	overflow: scroll;
+	white-space: nowrap;
+}
+.controls[data-hide="1"] {
+	display: none;
+}
+#controls-bottom {
+	bottom: 10px;
+}
+#controls-top {
+	top: 10px;
+}
+.controls button {
+	background-color: black;
+	color: white;
+	border: 1px solid white;
+	padding: 10px 15px 8.5px 20px;
+	font-size: 10px;
+	font-weight: bold;
+	text-transform: uppercase;
+	letter-spacing: 5px;
+	cursor: pointer;
+	font-family: 'Steps Mono', monospace;
+}
+.controls button[data-active="1"] {
+	border: 1px solid red;
+}
+.controls button:hover {
+	background-color: white;
+	border: 1px solid white;
+	color: black;
+}
+.controls button:active {
+	opacity: .5;
+}
+.controls-spacer {
+	flex: 1 1 20px;
+	min-width: 20px;
+	height: 1px;
+	background-color: white;
+}
+
+/* Fullscreen message */
+.msg {
+	position: fixed;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+	background: red;
+	color: black;
+	font-family: 'Steps Mono', monospace;
+	text-transform: uppercase;
+	font-weight: bold;
+	text-align: center;
+	font-size: 10px;
+	padding: 10px 15px 8.5px 20px;
+	letter-spacing: 5px;
+	z-index: 999999999999;
+}
+.msg[data-hide="1"] {
+	display: none;
+}
+
+/* Printing */
+@media print {
+	.controls {
+		display: none;
+	}
+	.poster{
+		position: static;
+		transform: unset;
+		top: 0;
+		left: 0;
+	}
+	.poster[data-size="letter"] {
+		width: 8.5in !important;
+		height: 11in !important;
+	}
+	.poster[data-size="letter"][data-rotate="1"] {
+		width: 11in !important;
+		height: 8.5in !important;
+	}
+	.poster[data-size="tabloid"] {
+		width: 11in !important;
+		height: 17in !important;
+	}
+	.poster[data-size="tabloid"][data-rotate="1"] {
+		width: 17in !important;
+		height: 11in !important;
+	}
+	.poster[data-size="fullsize"] {
+		width: 24in !important;
+		height: 36in !important;
+	}
+	.poster[data-size="fullsize"][data-rotate="1"] {
+		width: 36in !important;
+		height: 24in !important;
+	}
+	#recordings {
+		display: none;
+	}
+}

@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Onomatopeia</title>
+	<link rel="stylesheet" href="style.css">
+
+	<meta name="author" content="Gabriel Drozdov">
+	<meta name="keywords" content="HTML, CSS, JavaScript, Creative Coding, Generative Art, Sound Design, Waveforms, Poster">
+	<!-- <meta name="description" content="I have something I’d like for you to read, but I need your help to put it together."> -->
+	<!-- <meta property="og:url" content="https://compendium.noreplica.com/"> -->
+	<meta name="og:title" property="og:title" content="Onomatopeia">
+	<!-- <meta property="og:description" content="I have something I’d like for you to read, but I need your help to put it together."> -->
+	<meta property="og:image" content="/assets/opengraph.png">
+
+	<link rel="icon" type="image/png" href="assets/favicon.png" />
+	<style id="page">
+		@page {
+			size: 24in 36in;
+			margin: 0in;
+		}
+	</style>
+</head>
+
+<body>
+	<button id="record">Click to start recording</button>
+
+	<div id="mic" style="border: 1px solid #ddd; border-radius: 4px; margin-top: 1rem"></div>
+
+	<div id="recordings" style="margin: 1rem 0"></div>
+
+	<div class="poster" data-size="fullsize" data-rotate="0" data-borders="0" data-rows="25">
+	</div>
+
+	<div class="msg" data-hide="1">Click anywhere to exit fullscreen</div>
+
+	<div class="controls" id="controls-top" data-hide="1">
+		<button id="restart">Start Over</button>
+		<div class="controls-spacer"></div>
+		<button id="fullscreen">Fullscreen</button>
+		<button id="print" onclick="window.print();">Print</button>
+	</div>
+
+	<div class="controls" id="controls-bottom" data-hide="1">
+		<button id="randomize">Randomize</button>
+		<button id="synchronize" data-active="1">Synchronize</button>
+		<button id="borders">Borders</button>
+		<div class="controls-spacer"></div>
+		<button id="rows-10">10</button>
+		<button id="rows-25" data-active="1">25</button>
+		<button id="rows-50">50</button>
+		<div class="controls-spacer"></div>
+		<button id="letter">8.5"×11"</button>
+		<button id="tabloid">11"×17"</button>
+		<button id="fullsize" data-active="1">24"×36"</button>
+		<button id="rotate">Rotate</button>
+	</div>
+
+	<script src="script.js" type="module"></script>
+</body>
+
+</html>
