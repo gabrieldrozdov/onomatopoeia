@@ -14,6 +14,7 @@ const record = wavesurfer.registerPlugin(RecordPlugin.create())
 
 // Render recorded audio
 let start, delta, duration;
+let disclaimer = document.querySelector('.disclaimer');
 let controlsBottom = document.querySelector('#controls-bottom');
 let controlsTop = document.querySelector('#controls-top');
 record.on('record-end', (blob) => {
@@ -52,6 +53,7 @@ record.on('record-end', (blob) => {
 			duration = (delta / 1000 + 1).toFixed(2); // too fast if just 1000
 
 			// Style content
+			disclaimer.dataset.hide = 1;
 			controlsBottom.dataset.hide = 0;
 			controlsTop.dataset.hide = 0;
 			recButton.textContent = 'Click to start recording';
@@ -108,6 +110,8 @@ function populatePoster() {
 			for (let imageWidth of imageWidths) {
 				let waveformContainer = document.createElement('div');
 				waveformContainer.style.width = imageWidth + '%';
+				waveformContainer.dataset.invert = 0;
+				waveformContainer.addEventListener('click', () => {invertWaveform(waveformContainer)});
 
 				let waveform = newImg.cloneNode(true);
 				waveformContainer.appendChild(waveform);
@@ -123,6 +127,14 @@ function populatePoster() {
 			}
 		});
 	}, 50)
+}
+
+function invertWaveform(e) {
+	if (parseInt(e.dataset.invert) == 0) {
+		e.dataset.invert = 1;
+	} else {
+		e.dataset.invert = 0;
+	}
 }
 
 // Redo the recording
@@ -147,6 +159,7 @@ function restart() {
 	controlsTop.dataset.hide = 1;
 	recButton.style.display = 'block';
 	mic.style.display = 'flex';
+	disclaimer.dataset.hide = 0;
 }
 let restartBtn = document.querySelector('#restart');
 restartBtn.addEventListener('click', restart);
@@ -171,8 +184,10 @@ function sameInterval() {
 	synchronizeBtn.dataset.active = 1;
 }
 function setBorders() {
-	if (parseInt(poster.dataset.borders) == 2) {
+	if (parseInt(poster.dataset.borders) == 3) {
 		poster.dataset.borders = 0;
+	} else if (parseInt(poster.dataset.borders) == 2) {
+		poster.dataset.borders = 3;
 	} else if (parseInt(poster.dataset.borders) == 1) {
 		poster.dataset.borders = 2;
 	} else {
