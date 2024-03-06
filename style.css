@@ -127,10 +127,9 @@ body {
 	top: 10px;
 	transform: translate(-50%, 0);
 	padding: 10px 15px 9px 20px;
-	letter-spacing: 5px;
-	color: red;
+	color: white;
+	opacity: .5;
 	text-transform: uppercase;
-	font-weight: bold;
 	font-size: 10px;
 	font-family: 'Arial', sans-serif;;
 	z-index: 9999;
