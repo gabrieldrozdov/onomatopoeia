@@ -30,7 +30,7 @@ record.on('record-end', (blob) => {
 		url: recordedUrl,
 	})
 
-	populatePoster();
+	setTimeout(set25, 1000);
 
 	// // Play button (unused)
 	// const button = container.appendChild(document.createElement('button'))
